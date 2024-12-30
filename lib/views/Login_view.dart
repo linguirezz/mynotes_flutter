@@ -167,8 +167,11 @@ class _LoginState extends State<Login> {
                 ),
                   
                    ),
+                   
             ),
-             
+            //  TextButton(onPressed: (){
+            //     Navigator.of(context).pushAndRemoveUntil('/register/', (route) => false);
+            //  }, child: child)
              
           ],
         ),
