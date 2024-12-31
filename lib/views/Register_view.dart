@@ -75,7 +75,7 @@ class _RegisterState extends State<Register> {
               obscureText: true,
             ),
             Container(
-              margin:EdgeInsets.only(top:20.0,bottom:20.0),
+              margin:EdgeInsets.only(top:20.0),
               width: double.infinity,
               color: Colors.black,
               child: Center(
@@ -103,6 +103,14 @@ class _RegisterState extends State<Register> {
                  ),
                 
               ),
+            ),
+            
+            TextButton(
+              onPressed : (){
+                print("you clicked the link to register view");
+               Navigator.pushNamedAndRemoveUntil( context, '/login/', (Route<dynamic> route) => false, );;
+              },
+              child:Text("if you dont have any account click here")
             ),
             Center(
               child:Text("or",

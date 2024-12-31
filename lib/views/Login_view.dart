@@ -86,11 +86,28 @@ class _LoginState extends State<Login> {
                     final password = _password.text;
                     print(email);
                     print(password);
-                  try { UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword( email: email, password: password, );
+                  try { 
+                    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword( email: email, password: password, );
                   print(userCredential);
-                   print("User sign in: ${userCredential.user?.email}"); } on FirebaseAuthException 
-                  catch (e) { print("Error: ${e.message}"); }
+                   print("User sign in: ${userCredential.user?.email}"); 
+                   final isVerified = userCredential.user?.emailVerified ?? false;
+                   print('is verified ? $isVerified');
+                   if(!isVerified){
+                      Navigator.pushNamedAndRemoveUntil(context, '/verify/', (Route<dynamic> route)=>false);
+                   }
+                   else{
+                      Navigator.pushNamedAndRemoveUntil(context, '/verify/', (Route<dynamic> route)=>false);
+                   }
+                   }
+                   
+                   
+                  //  final isVerified = userCredential.user?.emailVerified; 
+                  //   if()
+                   on FirebaseAuthException 
+                  catch (e) { print("Error: ${e.message}");
                  
+                   }
+                    
                   },
                  style:ButtonStyle(
                  ) ,
@@ -106,6 +123,13 @@ class _LoginState extends State<Login> {
                  ),
                 
               ),
+            ),
+            TextButton(
+              onPressed : (){
+                print("you clicked the link to register view");
+               Navigator.pushNamedAndRemoveUntil( context, '/register/', (Route<dynamic> route) => false );
+              },
+              child:Text("if you dont have any account click here")
             ),
             Center(
               child:Text("or",
@@ -168,11 +192,7 @@ class _LoginState extends State<Login> {
                   
                    ),
                    
-            ),
-            //  TextButton(onPressed: (){
-            //     Navigator.of(context).pushAndRemoveUntil('/register/', (route) => false);
-            //  }, child: child)
-             
+            ),  
           ],
         ),
       )

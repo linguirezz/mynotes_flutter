@@ -4,7 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:mynotes/views/Login_view.dart';
 import 'package:mynotes/views/Register_view.dart';
-
+import 'package:mynotes/views/Verify_view.dart';
+import 'package:mynotes/views/notesView.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
@@ -19,7 +20,9 @@ void main() async {
       home: const HomePage(),
       routes: {
         '/login/':(context)=> const Login(),
-        '/register/':(context)=> const Register()
+        '/register/':(context)=> const Register(),
+        '/verify/':(context)=> const EmailVerify(),
+        '/Home/':(context)=> const MyNotes()
       },
     ));
 }
@@ -34,9 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("homepage"),
-      ),
+      
       body:FutureBuilder(
         future:  Firebase.initializeApp(
    options: DefaultFirebaseOptions.currentPlatform,
@@ -58,45 +59,14 @@ class _HomePageState extends State<HomePage> {
             final user = FirebaseAuth.instance.currentUser; 
             final isVerified = user?.emailVerified ?? false;
             if(!isVerified){
-              print("user is not verified");
-              //  Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context)=> const EmailVerify()
-              //     )
-              //     );
-              return Login();
+              return const EmailVerify();
             }
             else{
               print("user is verified");
-              return const Login();  
+              return const MyNotes();  
         } 
       }
   })
     );
-  }
-}
-class EmailVerify extends StatefulWidget {
-  const EmailVerify({super.key});
-
-  @override
-  State<EmailVerify> createState() => _EmailVerifyState();
-}
-
-class _EmailVerifyState extends State<EmailVerify> {
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-        onPressed:  () async {
-          final user = FirebaseAuth.instance.currentUser; 
-           try {
-           await  user?.sendEmailVerification();
-           } catch (e) {
-             print(e);
-           }
-        },
-         child: Text('send email verification',
-        style: TextStyle(
-          color: Colors.blue),)
-         );
   }
 }
