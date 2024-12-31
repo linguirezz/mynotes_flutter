@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mynotes/constant/routes.dart';
 
 
 
@@ -108,7 +109,7 @@ class _RegisterState extends State<Register> {
             TextButton(
               onPressed : (){
                 print("you clicked the link to register view");
-               Navigator.pushNamedAndRemoveUntil( context, '/login/', (Route<dynamic> route) => false, );;
+               Navigator.pushNamedAndRemoveUntil( context, loginRoute, (Route<dynamic> route) => false, );;
               },
               child:Text("if you dont have any account click here")
             ),

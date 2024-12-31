@@ -6,6 +6,7 @@ import 'package:mynotes/views/Login_view.dart';
 import 'package:mynotes/views/Register_view.dart';
 import 'package:mynotes/views/Verify_view.dart';
 import 'package:mynotes/views/notesView.dart';
+import 'package:mynotes/constant/routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
@@ -19,10 +20,10 @@ void main() async {
       ),
       home: const HomePage(),
       routes: {
-        '/login/':(context)=> const Login(),
-        '/register/':(context)=> const Register(),
-        '/verify/':(context)=> const EmailVerify(),
-        '/Home/':(context)=> const MyNotes()
+        loginRoute:(context)=> const Login(),
+       registerRoute:(context)=> const Register(),
+        verifyRoute:(context)=> const EmailVerify(),
+        notesRoute:(context)=> const MyNotes()
       },
     ));
 }
@@ -58,6 +59,7 @@ class _HomePageState extends State<HomePage> {
           case ConnectionState.done:
             final user = FirebaseAuth.instance.currentUser; 
             final isVerified = user?.emailVerified ?? false;
+            print(isVerified);
             if(!isVerified){
               return const EmailVerify();
             }

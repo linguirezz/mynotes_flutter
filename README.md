@@ -1,19 +1,25 @@
 # mynotes
 
-A new Flutter project.
+my first flutter project
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## feature 
+- routes page
+- autentifikasion(login,logout,)
+- pop up bar
+- 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## todo
+- error handler (user not found , wrong password , lack of character, password too weak , user already registered ,email tidak valid, dan error selain dari error autentikasi)
+-remove the error handler function into its own file in utilities folder
+-make email verif on register page
+- the email directly got send after click continue/submit button
+- make the verif contain the restart button to log out and restart everythinh
+- make the verif page has a button to resend the email
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-todo dari hari sebelumnya:
--buat route page antara login dan register
+## problem :
+- email verif ga ke kirim ke gmail
+- route masih berantakan dan perlu di uji coba dengan akun baru
+- route email verif masih sering ketuker

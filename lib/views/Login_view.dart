@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mynotes/constant/routes.dart';
 
 
 
@@ -93,10 +94,10 @@ class _LoginState extends State<Login> {
                    final isVerified = userCredential.user?.emailVerified ?? false;
                    print('is verified ? $isVerified');
                    if(!isVerified){
-                      Navigator.pushNamedAndRemoveUntil(context, '/verify/', (Route<dynamic> route)=>false);
+                      Navigator.pushNamedAndRemoveUntil(context, verifyRoute, (Route<dynamic> route)=>false);
                    }
                    else{
-                      Navigator.pushNamedAndRemoveUntil(context, '/verify/', (Route<dynamic> route)=>false);
+                      Navigator.pushNamedAndRemoveUntil(context, loginRoute, (Route<dynamic> route)=>false);
                    }
                    }
                    
@@ -104,7 +105,7 @@ class _LoginState extends State<Login> {
                   //  final isVerified = userCredential.user?.emailVerified; 
                   //   if()
                    on FirebaseAuthException 
-                  catch (e) { print("Error: ${e.message}");
+                  catch (e) { print("Error: ${e}");
                  
                    }
                     

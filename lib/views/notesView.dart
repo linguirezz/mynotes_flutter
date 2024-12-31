@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' as devTools show log;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mynotes/constant/routes.dart';
 enum MenuActions {
   logOut
 }
@@ -25,7 +26,7 @@ class _MyNotesState extends State<MyNotes> {
                 final popUpResult = await showPopUp(context);
                 if(popUpResult){
                   await FirebaseAuth.instance.signOut();
-                  Navigator.pushNamedAndRemoveUntil(context, '/login/', (Route<dynamic> route)=>false);
+                  Navigator.pushNamedAndRemoveUntil(context, loginRoute, (Route<dynamic> route)=>false);
                 }
                 
                 throw UnimplementedError();
