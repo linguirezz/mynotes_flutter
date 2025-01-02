@@ -17,7 +17,21 @@ my first flutter project
 ## todo :
 - make auth service
 - seperate business logic from client
-
+- buat folder exceptions_auth oada folder service
+- buat exception for :
+REGISTER:
+1. weak-password
+2. email-already-in-use
+3. invalid-email
+4. operation-not-allowed
+LOGIN :
+1. user-not-found
+2. wrong-credential
+3. wrong-password
+4. user-disable
+GENERIC :
+1. userNotLoggedIn
+2. GenericAuthException
 
 ## bug :
  bug still not discover yet in this commit
