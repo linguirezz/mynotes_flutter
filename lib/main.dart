@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             final isVerified = user?.emailVerified ?? false;
             print(isVerified);
             if(!isVerified){
-              return const EmailVerify();
+              return const Login();
             }
             else{
               print("user is verified");

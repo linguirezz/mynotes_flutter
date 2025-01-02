@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mynotes/constant/routes.dart';
-
+import 'package:mynotes/utilities/Error_Handler.dart';
 
 
 class Login extends StatefulWidget {
@@ -94,18 +94,20 @@ class _LoginState extends State<Login> {
                    final isVerified = userCredential.user?.emailVerified ?? false;
                    print('is verified ? $isVerified');
                    if(!isVerified){
-                      Navigator.pushNamedAndRemoveUntil(context, verifyRoute, (Route<dynamic> route)=>false);
+                      final user = FirebaseAuth.instance.currentUser;
+                      print("sending user emial verification");
+                      await user?.sendEmailVerification();
+                      Navigator.pushNamedAndRemoveUntil(context, verifyRoute, (Route<dynamic> route)=>true);
                    }
                    else{
-                      Navigator.pushNamedAndRemoveUntil(context, loginRoute, (Route<dynamic> route)=>false);
+                      Navigator.pushNamedAndRemoveUntil(context, notesRoute, (Route<dynamic> route)=>false);
                    }
                    }
                    
-                   
-                  //  final isVerified = userCredential.user?.emailVerified; 
-                  //   if()
                    on FirebaseAuthException 
-                  catch (e) { print("Error: ${e}");
+                  catch (e) { 
+                    ErrorHandler(context,e.code);
+                    print("Error: ${e.code}");
                  
                    }
                     
@@ -128,7 +130,7 @@ class _LoginState extends State<Login> {
             TextButton(
               onPressed : (){
                 print("you clicked the link to register view");
-               Navigator.pushNamedAndRemoveUntil( context, '/register/', (Route<dynamic> route) => false );
+               Navigator.pushNamedAndRemoveUntil( context, registerRoute, (Route<dynamic> route) => false );
               },
               child:Text("if you dont have any account click here")
             ),

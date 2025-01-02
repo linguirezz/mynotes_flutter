@@ -25,11 +25,12 @@ class _MyNotesState extends State<MyNotes> {
               case MenuActions.logOut:
                 final popUpResult = await showPopUp(context);
                 if(popUpResult){
+                  print("log out");
                   await FirebaseAuth.instance.signOut();
                   Navigator.pushNamedAndRemoveUntil(context, loginRoute, (Route<dynamic> route)=>false);
                 }
                 
-                throw UnimplementedError();
+                
             }
             } ,
             itemBuilder: (context)=>[PopupMenuItem<MenuActions>(

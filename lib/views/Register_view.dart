@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mynotes/constant/routes.dart';
-
+import 'package:mynotes/utilities/Error_Handler.dart';
 
 
 class Register extends StatefulWidget {
@@ -87,8 +87,27 @@ class _RegisterState extends State<Register> {
                     final password = _password.text;
                     print(email);
                     print(password);
-                  try { UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword( email: email, password: password, ); print("User registered: ${userCredential.user?.email}"); } on FirebaseAuthException catch (e) { print("Error: ${e.message}"); }
-                 
+                     
+                  try { UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword( email: email, password: password, ); 
+                  print("User registered: ${userCredential.user?.email}");
+                  final isVerified = userCredential.user?.emailVerified ?? false;
+                   print('is verified ? $isVerified');
+                   if(!isVerified){
+                      final user = FirebaseAuth.instance.currentUser;
+                      print("sending user emial verification");
+                      await user?.sendEmailVerification();
+                      Navigator.pushNamedAndRemoveUntil(context, verifyRoute, (Route<dynamic> route)=>true);
+                   }
+                   else{
+                      Navigator.pushNamedAndRemoveUntil(context, notesRoute, (Route<dynamic> route)=>false);
+                   }
+                   }
+                   on FirebaseAuthException catch (e) {
+                    ErrorHandler(context,e.code);
+                     print("Error: ${e.code}"); 
+
+                     }
+                   
                   },
                  style:ButtonStyle(
                  ) ,
